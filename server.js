@@ -14,7 +14,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors());
-app.use(helmet());
 app.use(express.json());
 app.use(rateLimit({ windowMs: 60 * 1000, max: 60 }));
 
