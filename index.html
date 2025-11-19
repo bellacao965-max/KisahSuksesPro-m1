@@ -1,78 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kisah Sukses Pro</title>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #006eff, #00c2ff);
-      font-family: Arial, Helvetica, sans-serif;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 30px;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 450px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    button {
-      background: #fff;
-      color: #0077ff;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 15px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      opacity: 0.8;
-    }
-
-    #quote {
-      font-size: 20px;
-      margin-top: 15px;
-      padding: 10px;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kisah Sukses Pro</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-  <div class="card">
     <h1>Kisah Sukses Pro</h1>
-    <p>Dapatkan motivasi setiap hari 🔥</p>
+    <p id="quote">Memuat quote...</p>
 
-    <div id="quote">Klik tombol untuk mendapatkan quote</div>
-
-    <button onclick="getQuote()">Ambil Quote</button>
-  </div>
-
-  <script>
-    async function getQuote() {
-      const res = await fetch("/api/quote");
-      const data = await res.json();
-      document.getElementById("quote").innerText = data.quote;
-    }
-  </script>
+    <script>
+        fetch("/api/quote")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("quote").innerText = data.quote;
+            });
+    </script>
 </body>
 </html>
