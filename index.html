@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kisah Sukses Pro</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; text-align: center; }
+    #container { background: white; padding: 20px; width: 90%; max-width: 500px; margin: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    button { padding: 10px 20px; background: orange; border: none; border-radius: 5px; cursor: pointer; color: white; font-size: 16px; }
+    button:hover { opacity: 0.8; }
+    #result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1>Kisah Sukses Pro</h1>
+    <p>Tekan tombol untuk mengambil quote motivasi.</p>
+    <button onclick="getQuote()">Ambil Quote</button>
+    <div id="result"></div>
+  </div>
+  <script>
+    async function getQuote() {
+      document.getElementById("result").innerText = "Memuat...";
+      try {
+        const r = await fetch("/api/quote");
+        const j = await r.json();
+        document.getElementById("result").innerText = j.quote;
+      } catch (e) {
+        document.getElementById("result").innerText = "Gagal mengambil data.";
+      }
+    }
+  </script>
+</body>
+</html>
