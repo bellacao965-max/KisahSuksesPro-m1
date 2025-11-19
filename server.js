@@ -14,12 +14,14 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
 app.use(rateLimit({ windowMs: 60 * 1000, max: 60 }));
 
-// SERVE STATIC FILES FROM public/
-app.use(express.static(path.join(__dirname, "public")));
+// 🔥 Sajikan semua file statis dari ROOT folder
+app.use(express.static(__dirname));
 
+// API kecil
 const QUOTES = [
   "Jangan menyerah. Proses tidak mengkhianati hasil.",
   "Sukses dimulai ketika kamu berani melangkah.",
@@ -31,10 +33,13 @@ app.get("/api/quote", (req, res) => {
   res.json({ quote: q });
 });
 
-// SEND index.html
+// 🔥 fallback ke index.html di ROOT
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log("SERVER READY on port", PORT));
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, () => {
+  console.log(`SERVER READY on port ${PORT}`);
+});
